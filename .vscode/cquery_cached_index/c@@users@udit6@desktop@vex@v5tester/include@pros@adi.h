@@ -8,7 +8,7 @@
  * This file should not be modified by users, since it gets replaced whenever
  * a kernel upgrade occurs.
  *
- * Copyright (c) 2017-2019, Purdue University ACM SIGBots.
+ * Copyright (c) 2017-2020, Purdue University ACM SIGBots.
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -18,6 +18,7 @@
 #ifndef _PROS_ADI_H_
 #define _PROS_ADI_H_
 
+#include <stdbool.h>
 #include <stdint.h>
 #ifndef PROS_ERR
 #define PROS_ERR (INT32_MAX)
@@ -37,8 +38,13 @@ typedef enum adi_port_config_e {
 	E_ADI_DIGITAL_IN = 2,
 	E_ADI_DIGITAL_OUT = 3,
 
+#ifdef _INTELLISENSE
+#define _DEPRECATE_DIGITAL_IN = E_ADI_DIGITAL_IN
+#define _DEPRECATE_ANALOG_IN = E_ADI_ANALOG_IN
+#else
 #define _DEPRECATE_DIGITAL_IN __attribute__((deprecated("use E_ADI_DIGITAL_IN instead"))) = E_ADI_DIGITAL_IN
 #define _DEPRECATE_ANALOG_IN __attribute__((deprecated("use E_ADI_ANALOG_IN instead"))) = E_ADI_ANALOG_IN
+#endif
 
 	E_ADI_SMART_BUTTON _DEPRECATE_DIGITAL_IN,
 	E_ADI_SMART_POT _DEPRECATE_ANALOG_IN,
@@ -571,11 +577,11 @@ int32_t adi_ultrasonic_get(adi_ultrasonic_t ult);
  * EADDRINUSE - The port is not configured as an ultrasonic
  *
  * \param port_ping
- *        The port connected to the orange OUTPUT cable. This should be in the
- *        next highest port following port_echo.
- * \param port_echo
- *        The port connected to the yellow INPUT cable. This should be in port
+ *        The port connected to the orange OUTPUT cable. This should be in port
  *        1, 3, 5, or 7 ('A', 'C', 'E', 'G').
+ * \param port_echo
+ *        The port connected to the yellow INPUT cable. This should be in the
+ *        next highest port following port_ping.
  *
  * \return An adi_ultrasonic_t object to be stored and used for later calls to
  * ultrasonic functions
