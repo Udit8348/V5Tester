@@ -141,4 +141,10 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "C:/Users/udit6/AppData/Local/Temp/tmpc9cg6
+            "C:/Users/udit6/AppData/Local/Temp/tmpc9cg69rb/autonomous.cpp.o",
+            "src\\autonomous.cpp"
+        ],
+        "directory": "C:\\Users\\udit6\\Desktop\\VEX\\V5Tester",
+        "file": "src\\autonomous.cpp"
+    }
+]
